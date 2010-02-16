@@ -27,7 +27,7 @@ module Grip
 
       self.file_name    = new_file.is_a?(Tempfile) ? new_file.original_filename : File.basename(new_file.path)
       self.file_size    = File.size(new_file.path)
-      self.content_type = MIME::Types.type_for(new_file.path)
+      self.content_type = MIME::Types.type_for(self.file_name)
 
       write_to_grid self, new_file
     end
@@ -60,7 +60,7 @@ module Grip
           new_attachment.owner_type   = self.class.to_s
           new_attachment.file_name    = File.basename(file_hash[:uploaded_file].path)
           new_attachment.file_size    = File.size(file_hash[:resized_file].path)
-          new_attachment.content_type = MIME::Types.type_for(file_hash[:uploaded_file].path)[0].content_type
+          new_attachment.content_type = MIME::Types.type_for(new_attachment.file_name)
           new_attachment.save!
 
           write_to_grid new_attachment, file_hash[:resized_file]
