@@ -23,6 +23,7 @@ module Grip
     before_destroy  :destroy_file
 
     def file=new_file
+			return if new_file.nil? || (new_file.is_a?(String) && new_file.blank?)
       raise InvalidFile unless (new_file.is_a?(File) || new_file.is_a?(Tempfile))
 
       self.file_name    = new_file.is_a?(Tempfile) ? new_file.original_filename : File.basename(new_file.path)
@@ -73,6 +74,10 @@ module Grip
       GridFS::GridStore.unlink(self.class.database, grid_key)
     end
 
+		def has_file?
+			!self.file_name.nil?
+		end
+
     def write_to_grid attachment, new_file
       GridFS::GridStore.open(self.class.database, attachment.grid_key, 'w', :content_type => attachment.content_type) do |f|
         f.write new_file.read
@@ -80,6 +85,7 @@ module Grip
     end
 
     def read_from_grid key
+			return nil unless has_file? 
       GridFS::GridStore.new(self.class.database, key, 'r')
     end
   end

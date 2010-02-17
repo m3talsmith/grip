@@ -2,7 +2,7 @@ require "test_helper"
 
 include Grip
 
-class GripAttachmentTest < Test::Unit::TestCase
+class TestAttachment < Test::Unit::TestCase
   context "An Attachment" do
     setup do
       @attachment   = Attachment.new( :name => "image", :owner_type => "Mock", :owner_id => Mongo::ObjectID.new )
@@ -58,6 +58,15 @@ class GripAttachmentTest < Test::Unit::TestCase
         assert_raise(InvalidFile) { @attachment.file = Hash.new }
       end
     end
+
+		context "with an empty string or nil" do
+			
+			should "set image to nil" do
+				@attachment.file = ""
+				assert_nil @attachment.file
+			end
+			
+		end
 
   end
 

@@ -7,7 +7,7 @@ require 'factory_girl'
 require 'factories'
 require 'RMagick'
 
-TEST_DB = 'test-grip'
+TEST_DB = 'test-grip' unless Object.const_defined?("TEST_DB")
 
 MongoMapper.database = TEST_DB
 
