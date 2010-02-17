@@ -25,6 +25,7 @@ module Grip
         end
 
         define_method("#{name}=") do |new_file|
+					return if new_file.nil? || (new_file.is_a?(String) && new_file.blank?)
           raise InvalidFile unless (new_file.is_a?(File) || new_file.is_a?(Tempfile))
           uploaded_files[name] ||= {}
           uploaded_files[name][:file] = new_file

@@ -30,6 +30,11 @@ class HasAttachmentTest < Test::Unit::TestCase
       assert_equal(1, Doc.after_save.collect(&:method).count)
     end
 
+		should "set to nill with an empty string or nil" do
+        @document.image = ""
+				assert_nil @document.image
+		end
+
     context "when assigned a file" do
       setup do
         @document.image = @image
