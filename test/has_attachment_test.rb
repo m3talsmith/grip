@@ -27,7 +27,7 @@ class HasAttachmentTest < Test::Unit::TestCase
     end
 
     should "have :after_save callback" do
-      assert_equal(1, Doc.after_save.collect(&:method).count)
+      assert(Doc.respond_to?('after_save'))
     end
 
 		should "set to nill with an empty string or nil" do
