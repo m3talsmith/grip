@@ -1,7 +1,7 @@
 source 'http://gemcutter.org'
 
 gem "mongo"
-gem "mongo_mapper", :git => 'git://github.com/merbjedi/mongomapper.git', :branch => 'rails3'
+gem "mongo_mapper", :git => 'git://github.com/m3talsmith/mongomapper.git', :branch => 'rails3'
 gem "mongo_ext"
 gem "miso", ">= 0.3.1"
 gem "mime-types"
