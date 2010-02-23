@@ -37,7 +37,7 @@ module Grip
       end
 
       def set_callbacks_once
-        after_save :save_attachments unless after_save.collect(&:method).include?(:save_attachments)
+        after_save :save_attachments unless (after_save.respond_to?('collect') ? after_save.collect(&:method).include?(:save_attachments) : false)
       end
 
       def uploaded_file_options
